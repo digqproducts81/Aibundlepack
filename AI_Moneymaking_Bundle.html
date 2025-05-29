@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Bundle by DIGQ</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      padding: 30px;
+      transition: opacity 0.8s ease;
+    }
+
+    .fadeIn {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .fadeOut {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .glow-title {
+      font-size: 2.8em;
+      color: #00ffff;
+      text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+      animation: pulseGlow 2s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+      }
+      100% {
+        text-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
+      }
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      color: #ccc;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      position: relative;
+      overflow: hidden;
+      padding: 15px 30px;
+      font-size: 1em;
+      border: 2px solid #0f0;
+      color: #0f0;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: 0.3s ease;
+      z-index: 1;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 0%;
+      height: 100%;
+      background-color: #0f0;
+      z-index: -1;
+      transition: width 5s linear;
+    }
+
+    .btn.filling::after {
+      width: 100%;
+    }
+
+    .btn.filling {
+      color: #000;
+    }
+
+    .btn.details {
+      border-color: #0ff;
+      color: #0ff;
+    }
+
+    .return-btn {
+      margin-top: 30px;
+      display: inline-block;
+      color: #0ff;
+      border: 2px solid #0ff;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      text-shadow: 0 0 5px #0ff, 0 0 15px #0ff;
+    }
+
+    .glitch-text {
+      font-size: 2em;
+      color: #0ff;
+      position: relative;
+      animation: glitch 1s infinite;
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(2px, -1px); }
+      60% { transform: translate(-1px, -1px); }
+      80% { transform: translate(1px, 2px); }
+      100% { transform: translate(0); }
+    }
+
+    .payment-box {
+      margin-top: 30px;
+      padding: 20px;
+      border: 2px solid #0ff;
+      border-radius: 10px;
+      background-color: rgba(0, 255, 255, 0.1);
+      animation: fadeInBox 1.5s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInBox {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      .glow-title {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Main Page -->
+  <div id="mainPage" class="container fadeIn">
+    <h1 class="glow-title">AI Moneymaking Strategies Bundle Pack</h1>
+    <p>Unlock digital income with this expert-built toolkit 💼</p>
+    <div class="buttons">
+      <button class="btn buy" onclick="startBuy(this)">₹39 BUY NOW</button>
+      <button class="btn details" onclick="showDetails()">DETAILS</button>
+    </div>
+  </div>
+
+  <!-- Details Page -->
+  <div id="detailsPage" class="container hidden fadeOut">
+    <h2>Connect with Us</h2>
+    <p class="glow-text">Message us on Instagram<br><strong>@digq.co</strong></p>
+    <div class="return-btn" onclick="goBackToMain('detailsPage')">← Return</div>
+  </div>
+
+  <!-- Buy Page -->
+  <div id="buyPage" class="container hidden fadeOut">
+    <h2 class="glitch-text">Pay ₹39 to: notashnaik@fam</h2>
+    <div class="payment-box">
+      <p>📸 <strong>Take screenshot after payment</strong><br>📩 Share to: <strong>@digq.co</strong> on Instagram</p>
+      <p>✅ UPI ID: <strong>notashnaik@fam</strong></p>
+    </div>
+    <div class="return-btn" onclick="goBackToMain('buyPage')">← Return</div>
+  </div>
+
+  <script>
+    function switchPage(hideId, showId) {
+      const hide = document.getElementById(hideId);
+      const show = document.getElementById(showId);
+
+      hide.classList.remove("fadeIn");
+      hide.classList.add("fadeOut");
+
+      setTimeout(() => {
+        hide.classList.add("hidden");
+        show.classList.remove("hidden");
+        show.classList.remove("fadeOut");
+        show.classList.add("fadeIn");
+      }, 500);
+    }
+
+    function showDetails() {
+      switchPage("mainPage", "detailsPage");
+    }
+
+    function goBackToMain(fromPage) {
+      switchPage(fromPage, "mainPage");
+    }
+
+    function startBuy(button) {
+      button.classList.add("filling");
+      setTimeout(() => {
+        button.classList.remove("filling");
+        switchPage("mainPage", "buyPage");
+      }, 5000);
+    }
+  </script>
+
+</body>
+</html>
